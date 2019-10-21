@@ -80,10 +80,11 @@ call c,*16  ; $DC =a
 jp (hl)     ; $E9
 jp hl       ; $E9
 
+ld a,(c)    ; $F2
+ldh a,(c)   ; $F2
 ld a,($FF00+*08) ; $F0 =a
 ldh a,(*08) ; $F0 ~a
 
-ld a,(c)    ; $F2
 ld sp,hl    ; $F9
 
 nop         ; $00
@@ -144,6 +145,7 @@ ld l,*08    ; $2E =a
 cpl         ; $2F
 
 ld sp,*16   ; $31 =a
+add sp,*08  ; $E8 =a
 
 ld (hld),a  ; $32
 ld (hl-),a  ; $32
@@ -517,15 +519,15 @@ reti        ; $D9
 sbc *08     ; $DE =a
 rst 18h     ; $DF
 
+ld (c),a    ; $E2
+ldh (c),a   ; $E2
 ld ($FF00+*08),a ; $E0 =a
 ldh (*08),a ; $E0 ~a
 pop hl      ; $E1
-ld (c),a    ; $E2
 
 push hl     ; $E5
 and *08     ; $E6 =a
 rst 20h     ; $E7
-add sp,*08  ; $E8 =a
 
 ld (*16),a  ; $EA =a
 xor *08     ; $EE =a
